@@ -26,6 +26,14 @@
         background-color: #282828;
         color: #fff;
       }
+
+      @media(max-width: 965px){
+        margin-bottom: 10px;
+      }
+    }
+
+    @media(max-width: 965px){
+      flex-wrap: wrap;
     }
   }
 }
