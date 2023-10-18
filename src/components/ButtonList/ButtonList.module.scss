@@ -1,0 +1,24 @@
+.buttons{
+    display: flex;
+
+    li{
+        margin-right: 10px;
+        cursor: pointer;
+        background: #f9f9f9;
+        padding: 10px;
+        border-radius: 10px;
+
+        &:hover{
+            background: rgb(170, 157, 157);
+        }
+
+        
+    }
+
+    .active{
+        background: rgb(170, 157, 157);
+        color: #fff;
+        font-weight: 700;
+    }
+}
+

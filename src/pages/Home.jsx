@@ -4,6 +4,7 @@ import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import Skeleton from "../components/PizzaBlock/Skeleton";
+import ButtonList from "../components/ButtonList";
 
 const Home = () => {
   const [items, setItems] = React.useState([]);
@@ -29,6 +30,7 @@ const Home = () => {
   return (
     <>
     <div className="container">
+      <ButtonList/>
       <div className="content__top">
         <Categories value={categoryId} onClickCategory={(i)=>setCategoryId(i)}/>
         <Sort />
