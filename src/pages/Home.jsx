@@ -10,8 +10,12 @@ const Home = () => {
 
   const [isLoading, setIsLoading] = React.useState(true);
 
+  const [categoryId, setCategoryId] = React.useState(555);
+
+  const [sortType, setSortType] = React.useState(0);
+
   React.useEffect(() => {
-    fetch(`https://65279f93931d71583df116d9.mockapi.io/items`)
+    fetch(`https://65279f93931d71583df116d9.mockapi.io/items?category=`+categoryId)
       .then((res) => {
         return res.json();
       })
@@ -19,12 +23,14 @@ const Home = () => {
         setItems(json);
         setIsLoading(false);
       });
-  }, []);
+      window.scrollTo(0,0)
+  }, [categoryId]);
 
   return (
     <>
+    <div className="container">
       <div className="content__top">
-        <Categories />
+        <Categories value={categoryId} onClickCategory={(i)=>setCategoryId(i)}/>
         <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
@@ -32,6 +38,7 @@ const Home = () => {
         {isLoading
           ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
           : items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)}
+      </div>
       </div>
     </>
   );
