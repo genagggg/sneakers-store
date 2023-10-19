@@ -11,14 +11,18 @@ const Home = () => {
 
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const [categoryId, setCategoryId] = React.useState(555);
+  const [categoryId, setCategoryId] = React.useState(0);
 
-  const [sortType, setSortType] = React.useState(0);
+  const [sortType, setSortType] = React.useState({
+    name: "популярности",
+    sortProperty: "rating"
+  });
 
   const [checkItem, setCheckItem] = React.useState(0)
 
   React.useEffect(() => {
-    fetch(`https://65279f93931d71583df116d9.mockapi.io/items?category=`+categoryId)
+    setIsLoading(true)
+    fetch(`https://65279f93931d71583df116d9.mockapi.io/items?${categoryId > 0 ? `category=${categoryId}`: ''}&sortBy=${sortType.sortProperty}&order=desc`)
       .then((res) => {
         return res.json();
       })
@@ -27,8 +31,8 @@ const Home = () => {
         setIsLoading(false);
       });
       window.scrollTo(0,0)
-  }, [categoryId]);
-
+  }, [categoryId, sortType]);
+console.log(categoryId, sortType)
   return (
     <>
     <div className="container">
