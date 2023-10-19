@@ -15,6 +15,8 @@ const Home = () => {
 
   const [sortType, setSortType] = React.useState(0);
 
+  const [checkItem, setCheckItem] = React.useState(0)
+
   React.useEffect(() => {
     fetch(`https://65279f93931d71583df116d9.mockapi.io/items?category=`+categoryId)
       .then((res) => {
@@ -30,10 +32,10 @@ const Home = () => {
   return (
     <>
     <div className="container">
-      <ButtonList/>
+      <ButtonList value={checkItem} onClickButton={(i)=>setCheckItem(i)}/>
       <div className="content__top">
         <Categories value={categoryId} onClickCategory={(i)=>setCategoryId(i)}/>
-        <Sort />
+        <Sort value={sortType} onClickSort={(i)=>setSortType(i)}/>
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
