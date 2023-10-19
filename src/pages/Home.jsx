@@ -22,7 +22,12 @@ const Home = () => {
 
   React.useEffect(() => {
     setIsLoading(true)
-    fetch(`https://65279f93931d71583df116d9.mockapi.io/items?${categoryId > 0 ? `category=${categoryId}`: ''}&sortBy=${sortType.sortProperty}&order=desc`)
+
+    const sortBy = sortType.sortProperty.replace('-', '');
+    const order = sortType.sortProperty.includes('-')?'asc':'desc';
+    const category = categoryId > 0 ? `category=${categoryId}`:'';
+
+    fetch(`https://65279f93931d71583df116d9.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}`)
       .then((res) => {
         return res.json();
       })
