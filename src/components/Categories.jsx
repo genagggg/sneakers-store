@@ -1,7 +1,6 @@
 import React from "react";
 
 function Categories({value, onClickCategory}){
-  console.log(value)
 
   const categories = [
     "Все",

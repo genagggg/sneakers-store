@@ -1,8 +1,6 @@
 import React from 'react';
 import styles from './NotFoundBlock.module.scss';
 
-console.log(styles)
-
 export const NotFoundBlock = () => {
   return (
     <div className={styles.root}>

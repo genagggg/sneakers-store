@@ -5,17 +5,20 @@ import  Home  from "./pages/Home";
 import  Cart  from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 import { Routes, Route } from "react-router-dom";
+import { useDispatch,useSelector } from "react-redux";
 
 export const SearchContext = React.createContext();
 
 function App() {
 
   const [searchValue, setSearchValue] = React.useState('');
-
+  const count = useSelector((state) => state.counter.value)
+  const dispatch = useDispatch()
+  console.log(count)
   return (
     <div className="wrapper">
 
-<SearchContext.Provider value={{searchValue, setSearchValue}}>
+{/* <SearchContext.Provider value={{searchValue, setSearchValue}}>
 
       <Header/>
       <div className="content">
@@ -27,7 +30,7 @@ function App() {
           </Routes>
         
       </div>
-      </SearchContext.Provider>
+      </SearchContext.Provider> */}
     </div>
   );
 }
