@@ -1,8 +1,8 @@
-import { combineReducers, configureStore, createStore } from "@reduxjs/toolkit";
-import counterReduser from './slises/filterSlice';
+import { combineReducers, createStore } from "@reduxjs/toolkit";
+import filter from "./slises/filterSlice";
 
-combineReducers({})
 export const store = createStore(
-    combineReducers({
-      counter: counterReduser
-    }))
+  combineReducers({
+    filter,
+  })
+);
