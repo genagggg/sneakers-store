@@ -8,10 +8,10 @@ import ButtonList from "../components/ButtonList";
 import Pagination from "../components/Pagination";
 import { SearchContext } from "../App";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategoryId } from "../redux/slises/filterSlice";
+import { setCategoryId, setPageCount } from "../redux/slises/filterSlice";
 
 const Home = () => {
-  const { categoryId, sort } = useSelector((state) => state.filter);
+  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
 
   const onClickCategory = (id) => {
@@ -24,8 +24,6 @@ const Home = () => {
 
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const [currentPage, setCurrentPage] = React.useState(1);
-
   const [checkItem, setCheckItem] = React.useState(0);
 
   const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
@@ -33,6 +31,10 @@ const Home = () => {
   const skeletons = [...new Array(6)].map((_, index) => (
     <Skeleton key={index} />
   ));
+
+  const onChangePage = number =>{
+dispatch(setPageCount(number))
+  }
 
   React.useEffect(() => {
     setIsLoading(true);
@@ -75,7 +77,7 @@ const Home = () => {
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">{isLoading ? skeletons : pizzas}</div>
-        <Pagination onChangePage={(number) => setCurrentPage(number)} />
+        <Pagination currentPage={currentPage} onChangePage={onChangePage} />
       </div>
     </>
   );
