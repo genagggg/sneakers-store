@@ -19,7 +19,7 @@ import { fetchPizzas, selectPizzaItems } from "../redux/slises/pizzaSlice";
 
 const Home = () => {
   const navigate = useNavigate();
-  const { categoryId, sort, currentPage } = useSelector(
+  const { categoryId, sort, currentPage, searchValue } = useSelector(
     (state) => state.filter
   );
   const { items, status } = useSelector(selectPizzaItems);
@@ -29,8 +29,6 @@ const Home = () => {
   const onClickCategory = (id) => {
     dispatch(setCategoryId(id));
   };
-
-  const { searchValue } = React.useContext(SearchContext);
 
   const [checkItem, setCheckItem] = React.useState(0);
 
