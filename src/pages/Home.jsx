@@ -15,14 +15,14 @@ import {
   setPageCount,
   setFilters,
 } from "../redux/slises/filterSlice";
-import { fetchPizzas } from "../redux/slises/pizzaSlice";
+import { fetchPizzas, selectPizzaItems } from "../redux/slises/pizzaSlice";
 
 const Home = () => {
   const navigate = useNavigate();
   const { categoryId, sort, currentPage } = useSelector(
     (state) => state.filter
   );
-  const { items, status } = useSelector((state) => state.pizza);
+  const { items, status } = useSelector(selectPizzaItems);
   const dispatch = useDispatch();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
