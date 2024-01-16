@@ -5,12 +5,12 @@ import CartItem from "../components/CartItem";
 import { clearItems, selectCart} from "../redux/slises/cartSlice";
 import CartEmpty from "../components/CartEmpty";
 
-const Cart = () => {
+const Cart: React.FC = () => {
 
   const dispatch = useDispatch()
   const {totalPrice, items} = useSelector(selectCart)
 
-  const totalCount = items.reduce((sum, item) => sum+item.count, 0)
+  const totalCount = items.reduce((sum: number, item: any) => sum+item.count, 0)
 
   const onClickClear =()=>{
     if(window.confirm('Are you sure you want to remove?')){
@@ -26,10 +26,10 @@ const Cart = () => {
     <>
      
         
-          <div class="container container--cart">
-            <div class="cart">
-              <div class="cart__top">
-                <h2 class="content__title">
+          <div className="container container--cart">
+            <div className="cart">
+              <div className="cart__top">
+                <h2 className="content__title">
                   <svg
                     width="18"
                     height="18"
@@ -54,14 +54,14 @@ const Cart = () => {
                     <path
                       d="M4.78002 4.99999H16.3334L15.2134 10.5933C15.1524 10.9003 14.9854 11.176 14.7417 11.3722C14.4979 11.5684 14.1929 11.6727 13.88 11.6667H6.83335C6.50781 11.6694 6.1925 11.553 5.94689 11.3393C5.70128 11.1256 5.54233 10.8295 5.50002 10.5067L4.48669 2.82666C4.44466 2.50615 4.28764 2.21182 4.04482 1.99844C3.80201 1.78505 3.48994 1.66715 3.16669 1.66666H1.66669"
                       stroke="white"
-                      stroke-width="1.8"
+                      strokeWidth="1.8"
                       strokeLinecap="round"
-                      strokLinejoin="round"
+                      strokeLinejoin="round"
                     />
                   </svg>
                   Корзина
                 </h2>
-                <div onClick={onClickClear} class="cart__clear">
+                <div onClick={onClickClear} className="cart__clear">
                   <svg
                     width="20"
                     height="20"
@@ -102,13 +102,13 @@ const Cart = () => {
                   <span>Очистить корзину</span>
                 </div>
               </div>
-              <div class="content__items">
+              <div className="content__items">
                 {
-                  items.map(item => <CartItem key={item.id} {...item}/>)
+                  items.map((item: any) => <CartItem key={item.id} {...item}/>)
                 }
               </div>
-              <div class="cart__bottom">
-                <div class="cart__bottom-details">
+              <div className="cart__bottom">
+                <div className="cart__bottom-details">
                   <span>
                     {" "}
                     Всего пицц: <b>{totalCount} шт.</b>{" "}
@@ -118,10 +118,10 @@ const Cart = () => {
                     Сумма заказа: <b>{totalPrice}</b>{" "}
                   </span>
                 </div>
-                <div class="cart__bottom-buttons">
+                <div className="cart__bottom-buttons">
                   <Link
                     to="/"
-                    class="button button--outline button--add go-back-btn"
+                    className="button button--outline button--add go-back-btn"
                   >
                     <svg
                       width="8"
@@ -141,7 +141,7 @@ const Cart = () => {
 
                     <span>Вернуться назад</span>
                   </Link>
-                  <div class="button pay-btn">
+                  <div className="button pay-btn">
                     <span>Оплатить сейчас</span>
                   </div>
                 </div>
