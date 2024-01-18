@@ -2,11 +2,11 @@ import React from "react";
 
 type CategoriesProps = {
   value: number;
-  onClickCategory: any;
-
+  onClickCategory: (i: number)=>void;
+  getCategories?: (categorie: string[])=>void;
 }
 
-const Categories: React.FC<CategoriesProps>=({value, onClickCategory})=>{
+const Categories: React.FC<CategoriesProps>=({value, onClickCategory, getCategories})=>{
 
   const categories = [
     "Все",
