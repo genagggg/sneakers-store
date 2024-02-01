@@ -1,50 +1,53 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectSort, setSort } from "../redux/slises/filterSlice";
+import {
+  SortPropertyEnum,
+  selectSort,
+  setSort,
+} from "../redux/slises/filterSlice";
 
 type SortItem = {
   name: string;
-  sortProperty: string;
-}
+  sortProperty: SortPropertyEnum;
+};
 
-type PopapClick = MouseEvent & {path: Node[]}
+type PopapClick = MouseEvent & { path: Node[] };
 
-export const list:SortItem[] = [
-  { name: "популярности (DESC)", sortProperty: "rating" },
-  { name: "популярности (ASC)", sortProperty: "-rating" },
-  { name: "цене (DESC)", sortProperty: "price" },
-  { name: "цене (ASC)", sortProperty: "-price" },
-  { name: "алфавиту (DESC)", sortProperty: "title" },
-  { name: "алфавиту (ASC)", sortProperty: "-title" },
+export const list: SortItem[] = [
+  { name: "популярности (DESC)", sortProperty: SortPropertyEnum.RATING_DESC },
+  { name: "популярности (ASC)", sortProperty: SortPropertyEnum.RATING_ASC },
+  { name: "цене (DESC)", sortProperty: SortPropertyEnum.PRICE_DESC },
+  { name: "цене (ASC)", sortProperty: SortPropertyEnum.PRICE_ASC },
+  { name: "алфавиту (DESC)", sortProperty: SortPropertyEnum.TITLE_DESC },
+  { name: "алфавиту (ASC)", sortProperty: SortPropertyEnum.TITLE_ASC },
 ];
 
-function Sort() {
+function SortPopap() {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
-  const sortRef = React.useRef<HTMLDivElement>(null)
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
   const sort = useSelector(selectSort);
 
-  const onClickSortOff = (obj:SortItem) => {
+  const onClickSortOff = (obj: SortItem) => {
     dispatch(setSort(obj));
     setOpen(false);
   };
 
-  React.useEffect(()=>{
-const handleClickOutside = (event: MouseEvent)=>{
-  const _event = event as PopapClick;
-  if( sortRef.current && !_event.path.includes(sortRef.current)){
-    setOpen(false)
-  }
-}
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent|undefined) => {
+      const _event = event as PopapClick;
+      if (sortRef.current && !_event.path?.includes(sortRef?.current)) {
+        setOpen(false);
+      }
+    };
 
-document.body.addEventListener('click', handleClickOutside)
+    document.body.addEventListener("click", handleClickOutside);
 
-return ()=>{
-  document.body.removeEventListener('click', handleClickOutside)
-}
-
-  }, [])
+    return () => {
+      document.body.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div ref={sortRef} className="sort">
@@ -85,4 +88,4 @@ return ()=>{
   );
 }
 
-export default Sort;
+export default SortPopap;

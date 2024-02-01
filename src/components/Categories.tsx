@@ -6,7 +6,7 @@ type CategoriesProps = {
   getCategories?: (categorie: string[])=>void;
 }
 
-const Categories: React.FC<CategoriesProps>=({value, onClickCategory, getCategories})=>{
+const Categories: React.FC<CategoriesProps>=({value, onClickCategory})=>{
 
   const categories = [
     "Все",

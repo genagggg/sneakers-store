@@ -1,10 +1,11 @@
-import { applyMiddleware, combineReducers, configureStore} from "@reduxjs/toolkit";
-import { composeWithDevTools } from "redux-devtools-extension";
+import {configureStore} from "@reduxjs/toolkit";
+
 import filter from "./slises/filterSlice";
 import cart from "./slises/cartSlice";
 import pizza from './slises/pizzaSlice';
-
-const store = configureStore({
+import { useDispatch } from "react-redux";
+//@ts-ignore
+export const store = configureStore({
   reducer:{
     filter,
     cart,
@@ -13,4 +14,6 @@ const store = configureStore({
 })
 
 export type RootState = ReturnType<typeof store.getState>
-export default store
+export type AppDispatch = typeof store.dispatch
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+
