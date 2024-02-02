@@ -13,6 +13,7 @@ import {
   setCategoryId,
   setPageCount,
   setFilters,
+  selectFilter,
 } from "../redux/slises/filterSlice";
 import {
   SearchPizzaParams,
@@ -25,10 +26,7 @@ const Home = () => {
 
   const navigate = useNavigate();
  
-  const { categoryId, sort, currentPage, searchValue } = useSelector(
- //@ts-ignore
-    (state) => state.filter
-  );
+  const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter)
   const { items, status } = useSelector(selectPizzaItems);
   const dispatch = useAppDispatch();
   const isSearch = React.useRef(false);
@@ -88,7 +86,7 @@ const Home = () => {
 
   const pizzas = items.map((obj: any) => (
     
-      <PizzaBlock {...obj} />
+      <PizzaBlock key={obj.id} {...obj} />
   
   ));
 

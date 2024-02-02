@@ -1,21 +1,23 @@
 import React from "react";
-
+import { useWhyDidYouUpdate } from "ahooks";
 type CategoriesProps = {
   value: number;
   onClickCategory: (i: number)=>void;
   getCategories?: (categorie: string[])=>void;
 }
 
-const Categories: React.FC<CategoriesProps>=({value, onClickCategory})=>{
+const categories = [
+  "Все",
+  "Мясные",
+  "Вегетарианские",
+  "Гриль",
+  "Острые",
+  "Закрытые",
+]
 
-  const categories = [
-    "Все",
-    "Мясные",
-    "Вегетарианские",
-    "Гриль",
-    "Острые",
-    "Закрытые",
-  ]
+const Categories: React.FC<CategoriesProps>=({value, onClickCategory})=>{
+useWhyDidYouUpdate('Categories', {value, onClickCategory})
+
     return (
         <div className="categories">
             <ul>
