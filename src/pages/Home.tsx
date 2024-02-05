@@ -31,9 +31,10 @@ const Home = () => {
   const dispatch = useAppDispatch();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
-  const onClickCategory = (id: number) => {
+
+  const onClickCategory = React.useCallback((id: number) => {
     dispatch(setCategoryId(id));
-  };
+  },[])
 
   const [checkItem, setCheckItem] = React.useState(0);
 
@@ -108,7 +109,7 @@ const Home = () => {
         <ButtonList value={checkItem} onClickButton={(i) => setCheckItem(i)} />
         <div className="content__top">
           <Categories value={categoryId} onClickCategory={onClickCategory} />
-          <Sort />
+          <Sort value={sort}/>
         </div>
         <h2 className="content__title">Все пиццы</h2>
 

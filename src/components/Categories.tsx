@@ -15,7 +15,7 @@ const categories = [
   "Закрытые",
 ]
 
-const Categories: React.FC<CategoriesProps>=({value, onClickCategory})=>{
+const Categories: React.FC<CategoriesProps>=React.memo(({value, onClickCategory})=>{
 useWhyDidYouUpdate('Categories', {value, onClickCategory})
 
     return (
@@ -31,6 +31,6 @@ useWhyDidYouUpdate('Categories', {value, onClickCategory})
             </ul>
           </div>
     )
-}
+})
 
 export default Categories;
