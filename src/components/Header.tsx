@@ -1,32 +1,45 @@
 import React from "react";
 import logoSvg from "../assets/img/pizza-logo.svg";
+import userPng from "../assets/img/user-image.png"
 import { Link, useLocation } from "react-router-dom";
 import Search from "./Search";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { selectCart } from "../redux/slises/cartSlice";
 
 function Header() {
-
   const {items, totalPrice} = useSelector(selectCart)
   const location = useLocation()
-  console.log(location);
-
   const totalCount = items.reduce((sum: number, item: any) => sum+item.count, 0)
+  const isMounted = React.useRef(false)
+
+  React.useEffect(()=>{
+    if(isMounted.current){
+    const json = JSON.stringify(items)
+    localStorage.setItem('cart', json)
+  }
+isMounted.current = true
+  }, [items])
+
   return (
     <div className="header">
       <div className="container">
         <Link to="/">
           <div className="header__logo">
             <img width="38" src={logoSvg} alt="Pizza logo" />
+            
             <div>
               <h1>React Pizza</h1>
               <p>самая вкусная пицца во вселенной</p>
             </div>
           </div>
         </Link>
-        <Search/>
         
-        {location.pathname !== '/cart' && <div className="header__cart">
+        {location.pathname !== '/cart' && <Search/>}
+        
+        {location.pathname !== '/cart' &&  <div className="header__cart">
+          <Link to="/form-user">
+        <img width="38" src={userPng} alt="userPng" />
+        </Link>
           <Link to="/cart" className="button button--cart">
             <span>{totalPrice} р</span>
             <div className="button__delimiter"></div>

@@ -6,6 +6,7 @@ import NotFound from "./pages/NotFound";
 import { Routes, Route } from "react-router-dom";
 import FullPizza from "./pages/FullPizza";
 import MainLayout from "./layouts/MainLayout";
+import FormUser from "./pages/FormUser";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path="" element={<Home />} />
       <Route path="cart" element={<Cart />} />
       <Route path="pizza/:id" element={<FullPizza />} />
+      <Route path="form-user" element={<FormUser/>} />
       <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
