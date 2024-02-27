@@ -1,6 +1,28 @@
-import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { IShipingFields } from "../app.interface";
+import React, { useEffect } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { IOptions, IShipingFields } from "../app.interface";
+import ReactSelect from "react-select";
+const options: IOptions[] = [
+  {
+    value: "russia",
+    label: "Russia",
+  },
+  {
+    value: "china",
+    label: "China",
+  },
+  {
+    value: "usa",
+    label: "USA",
+  },
+  {
+    value: "new-zeeland",
+    label: "New Zeeland",
+  },
+];
+
+const getValue = (value: string) =>
+  value ? options.find((option) => option.value === value) : "";
 
 const FormUser: React.FC = () => {
   const {
@@ -8,17 +30,25 @@ const FormUser: React.FC = () => {
     handleSubmit,
     formState: { errors },
     reset,
-    resetField
+    watch,
+    setValue,
+    control,
   } = useForm<IShipingFields>({
-    defaultValues:{
-        email: 'rtest@test.ru',
-    }
+    mode: "onChange",
   });
   const onSubmit: SubmitHandler<IShipingFields> = (data) => {
     alert(`You name ${data.name}, you email ${data.email}`);
-    console.log(data)
-    reset()
+    console.log(data);
+    reset();
   };
+
+  useEffect(() => {
+    const subscription = watch((value, { name, type }) =>
+      console.log(value, name, type)
+    );
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -45,10 +75,41 @@ const FormUser: React.FC = () => {
         {errors?.email && (
           <div style={{ color: "red" }}>{errors.email.message}</div>
         )}
+
+        <Controller
+          control={control}
+          name="address.country"
+          rules = {{
+            required: 'Country is require!'
+          }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <div>
+              <ReactSelect
+                classNamePrefix="custom-select"
+                placeholder="Countries"
+                options={options}
+                value={getValue(value)}
+                onChange={(newValue) => onChange((newValue as IOptions).value)}
+              />
+              {error && <div style={{ color: "red" }}>{error.message}</div>}
+            </div>
+          )}
+        />
+
         <div>
           <button>Send</button>
         </div>
       </form>
+      <div>
+        <button
+          onClick={() => {
+            setValue("name", "Max");
+            setValue("email", "test@test.ru");
+          }}
+        >
+          Fill data
+        </button>
+      </div>
     </div>
   );
 };
