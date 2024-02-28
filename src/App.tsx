@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import FullPizza from "./pages/FullPizza";
 import MainLayout from "./layouts/MainLayout";
 import FormUser from "./pages/FormUser";
+import ShippingForm from "./pages/ShippingForm";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="cart" element={<Cart />} />
       <Route path="pizza/:id" element={<FullPizza />} />
       <Route path="form-user" element={<FormUser/>} />
+      <Route path="shipping" element={<ShippingForm/>} />
       <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
