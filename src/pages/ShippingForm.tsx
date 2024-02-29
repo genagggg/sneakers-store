@@ -30,6 +30,9 @@ const ShippingForm: React.FC = () => {
         <div style={{ marginBottom: 12 }}>
           <input {...register("firstName", {required: true, maxLength: 2})} placeholder="your name" />
         </div>
+        <div>
+          <input {...register("lastName", {required: true})} />
+        </div>
         <button>Отправка</button>
       </form>
     </div>
