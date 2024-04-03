@@ -1,7 +1,7 @@
 import React from "react";
-import qs from "qs";
-import { list } from "../components/Sort";
-import { Link, useNavigate } from "react-router-dom";
+// import qs from "qs";
+// import { list } from "../components/Sort";
+// import { Link, useNavigate } from "react-router-dom";
 import Categories from "../components/Categories";
 import Sort from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
@@ -12,11 +12,11 @@ import { useSelector } from "react-redux";
 import {
   setCategoryId,
   setPageCount,
-  setFilters,
+  // setFilters,
   selectFilter,
 } from "../redux/slises/filterSlice";
 import {
-  SearchPizzaParams,
+  // SearchPizzaParams,
   fetchPizzas,
   selectPizzaItems,
 } from "../redux/slises/pizzaSlice";
@@ -24,13 +24,13 @@ import { useAppDispatch } from "../redux/store";
 
 const Home = () => {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
  
   const { categoryId, sort, currentPage, searchValue } = useSelector(selectFilter)
   const { items, status } = useSelector(selectPizzaItems);
   const dispatch = useAppDispatch();
-  const isSearch = React.useRef(false);
-  const isMounted = React.useRef(false);
+  // const isSearch = React.useRef(false);
+  // const isMounted = React.useRef(false);
 
   const onClickCategory = React.useCallback((id: number) => {
     dispatch(setCategoryId(id));

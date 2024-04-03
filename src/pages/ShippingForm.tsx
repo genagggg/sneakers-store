@@ -17,7 +17,7 @@ const ShippingForm: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<IFormShipping>();
 
   const onSubmit: SubmitHandler<IFormShipping> = (data) =>{
